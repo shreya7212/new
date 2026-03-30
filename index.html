@@ -6,282 +6,132 @@
   <title>Pickwise</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #f7f7fb, #ffffff);
-      color:#111;
-      overflow-x:hidden;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#ffffff;color:#111;overflow-x:hidden}
+
+    /* animated gradient background */
+    body::before{
+      content:"";
+      position:fixed;
+      width:100%;height:100%;
+      background:linear-gradient(120deg,#6366f1,#8b5cf6,#22c55e);
+      background-size:300% 300%;
+      animation:gradientMove 12s ease infinite;
+      z-index:-2;opacity:0.08;
     }
 
-    header {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 60px;
-      background:rgba(255,255,255,0.7);
-      backdrop-filter: blur(12px);
-      position:sticky;
-      top:0;
-      z-index:100;
+    @keyframes gradientMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
 
-    .logo { font-weight:700; font-size:20px; }
+    header{display:flex;justify-content:space-between;padding:20px 60px;position:fixed;width:100%;top:0;background:rgba(255,255,255,0.6);backdrop-filter:blur(12px);z-index:100}
 
-    nav a {
-      margin-left:20px;
-      text-decoration:none;
-      color:#333;
-      font-size:14px;
-    }
+    .hero{padding:200px 20px 140px;text-align:center}
+    .hero h1{font-size:72px;letter-spacing:-2px}
+    .hero p{color:#555;margin-top:10px}
 
-    .hero {
-      text-align:center;
-      padding:140px 20px 100px;
-      animation: fadeUp 1s ease;
-    }
+    .btn{padding:14px 22px;border-radius:14px;border:none;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;cursor:pointer;transition:.3s}
+    .btn:hover{transform:scale(1.08)}
 
-    .hero h1 {
-      font-size:64px;
-      font-weight:700;
-      letter-spacing:-1px;
-    }
+    .section{padding:140px 60px;opacity:0;transform:translateY(80px);transition:1s}
+    .section.show{opacity:1;transform:translateY(0)}
 
-    .hero p {
-      margin-top:15px;
-      color:#666;
-      font-size:18px;
-    }
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
 
-    .buttons { margin-top:25px; }
-
-    .btn {
-      padding:14px 22px;
-      border-radius:12px;
-      border:none;
-      cursor:pointer;
-      margin:5px;
-      font-weight:600;
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      opacity:0.9;
-    }
-
-    .primary { background:#111; color:white; }
-    .secondary { background:#eee; }
-
-    .section {
-      padding:100px 60px;
-      opacity:0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-    }
-
-    .section.show {
-      opacity:1;
-      transform: translateY(0);
-    }
-
-    .section h2 {
-      font-size:36px;
-      margin-bottom:40px;
-    }
-
-    .grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap:25px;
-    }
-
-    .card {
+    .card{
       background:white;
       padding:25px;
       border-radius:20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
+      box-shadow:0 20px 50px rgba(0,0,0,0.08);
+      transform-style:preserve-3d;
+      transition:.4s;
+      opacity:0;
+      transform:translateY(40px);
     }
 
-    .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+    .card.show{
+      opacity:1;
+      transform:translateY(0);
     }
 
-    .tag {
-      display:inline-block;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:12px;
-      background:#f1f1f1;
-      margin-bottom:10px;
+    /* stagger animation */
+    .card:nth-child(1){transition-delay:0.1s}
+    .card:nth-child(2){transition-delay:0.2s}
+    .card:nth-child(3){transition-delay:0.3s}
+
+    .card:hover{transform:scale(1.05) rotateX(6deg) rotateY(-6deg)}
+
+    /* parallax floating shapes */
+    .blob{
+      position:absolute;
+      width:300px;height:300px;
+      background:radial-gradient(circle,#6366f1,transparent);
+      filter:blur(100px);
+      z-index:-1;
     }
 
-    .comparison {
-      display:flex;
-      justify-content:space-between;
-      margin:15px 0;
-      font-size:14px;
-      color:#555;
-    }
+    .blob1{top:100px;left:10%}
+    .blob2{top:400px;right:10%}
 
-    .highlight {
-      font-weight:600;
-      color:#000;
-    }
-
-    .features { text-align:center; }
-
-    .feature-card {
-      padding:30px;
-      border-radius:20px;
-      background:white;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      transition:0.3s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-    }
-
-    .cta {
-      text-align:center;
-      padding:120px 20px;
-      background:#111;
-      color:white;
-      border-radius:30px;
-      margin:40px;
-    }
-
-    footer {
-      text-align:center;
-      padding:40px;
-      color:#666;
-    }
-
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(40px);} 
-      to { opacity:1; transform:translateY(0);} 
-    }
+    footer{text-align:center;padding:40px;color:#666}
 
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Pickwise</div>
-  <nav>
-    <a href="#">Features</a>
-    <a href="#">Compare</a>
-    <a href="#">Trends</a>
-  </nav>
+  <div><b>Pickwise</b></div>
 </header>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
 
 <section class="hero">
   <h1>Pick Smart. Shop Smarter.</h1>
-  <p>Discover trends, compare prices, and never overpay again.</p>
-  <div class="buttons">
-    <button class="btn primary">Explore Trends</button>
-    <button class="btn secondary">Compare Now</button>
-  </div>
+  <p>Compare prices. Track trends. Save money.</p>
+  <button class="btn">Explore Trends</button>
 </section>
 
 <section class="section">
   <h2>🔥 Trending Comparisons</h2>
   <div class="grid">
-
-    <div class="card">
-      <span class="tag">Trending</span>
-      <h3>Nike Air Max</h3>
-      <div class="comparison">
-        <span>Amazon ₹5999</span>
-        <span>Flipkart ₹5499</span>
-      </div>
-      <div class="highlight">Save ₹500</div>
-    </div>
-
-    <div class="card">
-      <span class="tag">Viral</span>
-      <h3>Boat Airdopes</h3>
-      <div class="comparison">
-        <span>Amazon ₹1999</span>
-        <span>Flipkart ₹1799</span>
-      </div>
-      <div class="highlight">Best deal on Flipkart</div>
-    </div>
-
-    <div class="card">
-      <span class="tag">Hot</span>
-      <h3>iPhone 14</h3>
-      <div class="comparison">
-        <span>Amazon ₹69999</span>
-        <span>Flipkart ₹67499</span>
-      </div>
-      <div class="highlight">Save ₹2500</div>
-    </div>
-
+    <div class="card"><h3>Nike Air Max</h3><p>Amazon ₹5999 vs Flipkart ₹5499</p></div>
+    <div class="card"><h3>iPhone 14</h3><p>Amazon ₹69999 vs Flipkart ₹67499</p></div>
+    <div class="card"><h3>Boat Airdopes</h3><p>Amazon ₹1999 vs Flipkart ₹1799</p></div>
   </div>
 </section>
 
-<section class="section">
-  <h2>📊 Smart Comparisons</h2>
-  <div class="grid">
-
-    <div class="card">
-      <h3>Adidas Sneakers</h3>
-      <div class="comparison">
-        <span>Myntra ₹4599</span>
-        <span>Amazon ₹4999</span>
-      </div>
-      <div class="highlight">Best deal on Myntra</div>
-    </div>
-
-    <div class="card">
-      <h3>Samsung S23</h3>
-      <div class="comparison">
-        <span>Amazon ₹74999</span>
-        <span>Flipkart ₹71999</span>
-      </div>
-      <div class="highlight">Save ₹3000</div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section features">
-  <h2>✨ Why Pickwise</h2>
-  <div class="grid">
-    <div class="feature-card">Smart Price Tracking</div>
-    <div class="feature-card">Trend Detection</div>
-    <div class="feature-card">Wishlist Alerts</div>
-  </div>
-</section>
-
-<section class="cta">
-  <h2>Start Picking Smarter Today</h2>
-  <p>Join thousands of users saving money daily</p>
-  <button class="btn primary">Get Started</button>
-</section>
-
-<footer>
-  <p>© 2026 Pickwise</p>
-</footer>
+<footer>© 2026 Pickwise</footer>
 
 <script>
-  const sections = document.querySelectorAll('.section');
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.2 });
+// scroll reveal
+const sections=document.querySelectorAll('.section');
+const cards=document.querySelectorAll('.card');
 
-  sections.forEach(section => {
-    observer.observe(section);
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      entry.target.querySelectorAll('.card').forEach(c=>c.classList.add('show'));
+    }
   });
+},{threshold:0.2});
+
+sections.forEach(sec=>observer.observe(sec));
+
+// mouse parallax effect
+window.addEventListener('mousemove',e=>{
+  const x=(e.clientX/window.innerWidth-0.5)*20;
+  const y=(e.clientY/window.innerHeight-0.5)*20;
+
+  document.querySelectorAll('.blob').forEach(blob=>{
+    blob.style.transform=`translate(${x}px, ${y}px)`;
+  });
+});
+
 </script>
 
 </body>
