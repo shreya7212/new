@@ -4,143 +4,285 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pickwise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f7f7fb;
-      color: #111;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #f7f7fb, #ffffff);
+      color:#111;
+      overflow-x:hidden;
     }
+
     header {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 60px;
+      background:rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      position:sticky;
+      top:0;
+      z-index:100;
     }
-    .logo { font-weight: bold; font-size: 20px; }
+
+    .logo { font-weight:700; font-size:20px; }
+
+    nav a {
+      margin-left:20px;
+      text-decoration:none;
+      color:#333;
+      font-size:14px;
+    }
+
     .hero {
-      text-align: center;
-      padding: 100px 20px;
+      text-align:center;
+      padding:140px 20px 100px;
+      animation: fadeUp 1s ease;
     }
+
     .hero h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
+      font-size:64px;
+      font-weight:700;
+      letter-spacing:-1px;
     }
+
     .hero p {
-      color: #555;
-      margin-bottom: 20px;
+      margin-top:15px;
+      color:#666;
+      font-size:18px;
     }
+
+    .buttons { margin-top:25px; }
+
     .btn {
-      padding: 12px 20px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      margin: 5px;
+      padding:14px 22px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      margin:5px;
+      font-weight:600;
+      transition: all 0.3s ease;
     }
-    .primary { background: black; color: white; }
-    .secondary { background: #eaeaea; }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity:0.9;
+    }
+
+    .primary { background:#111; color:white; }
+    .secondary { background:#eee; }
 
     .section {
-      padding: 60px 40px;
+      padding:100px 60px;
+      opacity:0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .section.show {
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      font-size:36px;
+      margin-bottom:40px;
     }
 
     .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:25px;
     }
 
     .card {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+    }
+
+    .tag {
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:12px;
+      background:#f1f1f1;
+      margin-bottom:10px;
     }
 
     .comparison {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
+      display:flex;
+      justify-content:space-between;
+      margin:15px 0;
+      font-size:14px;
+      color:#555;
+    }
+
+    .highlight {
+      font-weight:600;
+      color:#000;
+    }
+
+    .features { text-align:center; }
+
+    .feature-card {
+      padding:30px;
+      border-radius:20px;
+      background:white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition:0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .cta {
+      text-align:center;
+      padding:120px 20px;
+      background:#111;
+      color:white;
+      border-radius:30px;
+      margin:40px;
     }
 
     footer {
-      text-align: center;
-      padding: 40px;
-      background: white;
-      margin-top: 40px;
+      text-align:center;
+      padding:40px;
+      color:#666;
     }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(40px);} 
+      to { opacity:1; transform:translateY(0);} 
+    }
+
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo">Pickwise</div>
-  <div>Explore • Compare • Trends</div>
+  <nav>
+    <a href="#">Features</a>
+    <a href="#">Compare</a>
+    <a href="#">Trends</a>
+  </nav>
 </header>
 
 <section class="hero">
   <h1>Pick Smart. Shop Smarter.</h1>
-  <p>Compare prices, track trends, and find the best deals instantly.</p>
-  <button class="btn primary">Explore Trends</button>
-  <button class="btn secondary">Compare Now</button>
+  <p>Discover trends, compare prices, and never overpay again.</p>
+  <div class="buttons">
+    <button class="btn primary">Explore Trends</button>
+    <button class="btn secondary">Compare Now</button>
+  </div>
 </section>
 
 <section class="section">
   <h2>🔥 Trending Comparisons</h2>
   <div class="grid">
+
     <div class="card">
+      <span class="tag">Trending</span>
       <h3>Nike Air Max</h3>
       <div class="comparison">
-        <span>Amazon: ₹5999</span>
-        <span>Flipkart: ₹5499</span>
+        <span>Amazon ₹5999</span>
+        <span>Flipkart ₹5499</span>
       </div>
-      <strong>Best Price: Flipkart</strong>
+      <div class="highlight">Save ₹500</div>
     </div>
+
     <div class="card">
+      <span class="tag">Viral</span>
+      <h3>Boat Airdopes</h3>
+      <div class="comparison">
+        <span>Amazon ₹1999</span>
+        <span>Flipkart ₹1799</span>
+      </div>
+      <div class="highlight">Best deal on Flipkart</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">Hot</span>
       <h3>iPhone 14</h3>
       <div class="comparison">
-        <span>Amazon: ₹69,999</span>
-        <span>Flipkart: ₹67,499</span>
+        <span>Amazon ₹69999</span>
+        <span>Flipkart ₹67499</span>
       </div>
-      <strong>Save ₹2500</strong>
+      <div class="highlight">Save ₹2500</div>
     </div>
+
   </div>
 </section>
 
 <section class="section">
-  <h2>📊 Compare Products</h2>
+  <h2>📊 Smart Comparisons</h2>
   <div class="grid">
+
     <div class="card">
       <h3>Adidas Sneakers</h3>
       <div class="comparison">
-        <span>Amazon: ₹4999</span>
-        <span>Myntra: ₹4599</span>
+        <span>Myntra ₹4599</span>
+        <span>Amazon ₹4999</span>
       </div>
-      <strong>Lowest: Myntra</strong>
+      <div class="highlight">Best deal on Myntra</div>
     </div>
+
+    <div class="card">
+      <h3>Samsung S23</h3>
+      <div class="comparison">
+        <span>Amazon ₹74999</span>
+        <span>Flipkart ₹71999</span>
+      </div>
+      <div class="highlight">Save ₹3000</div>
+    </div>
+
   </div>
 </section>
 
-<section class="section">
-  <h2>✨ Features</h2>
+<section class="section features">
+  <h2>✨ Why Pickwise</h2>
   <div class="grid">
-    <div class="card">Smart Price Tracking</div>
-    <div class="card">Trend Detection</div>
-    <div class="card">Wishlist Alerts</div>
+    <div class="feature-card">Smart Price Tracking</div>
+    <div class="feature-card">Trend Detection</div>
+    <div class="feature-card">Wishlist Alerts</div>
   </div>
 </section>
 
-<section class="section">
-  <h2>📩 Stay Updated</h2>
-  <p>Get alerts when prices drop</p>
-  <input placeholder="Enter email" />
-  <button class="btn primary">Subscribe</button>
+<section class="cta">
+  <h2>Start Picking Smarter Today</h2>
+  <p>Join thousands of users saving money daily</p>
+  <button class="btn primary">Get Started</button>
 </section>
 
 <footer>
   <p>© 2026 Pickwise</p>
 </footer>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+</script>
 
 </body>
 </html>
