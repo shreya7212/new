@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pickwise</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f7f7fb;
+      color: #111;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .logo { font-weight: bold; font-size: 20px; }
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .primary { background: black; color: white; }
+    .secondary { background: #eaeaea; }
+
+    .section {
+      padding: 60px 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .comparison {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Pickwise</div>
+  <div>Explore • Compare • Trends</div>
+</header>
+
+<section class="hero">
+  <h1>Pick Smart. Shop Smarter.</h1>
+  <p>Compare prices, track trends, and find the best deals instantly.</p>
+  <button class="btn primary">Explore Trends</button>
+  <button class="btn secondary">Compare Now</button>
+</section>
+
+<section class="section">
+  <h2>🔥 Trending Comparisons</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Nike Air Max</h3>
+      <div class="comparison">
+        <span>Amazon: ₹5999</span>
+        <span>Flipkart: ₹5499</span>
+      </div>
+      <strong>Best Price: Flipkart</strong>
+    </div>
+    <div class="card">
+      <h3>iPhone 14</h3>
+      <div class="comparison">
+        <span>Amazon: ₹69,999</span>
+        <span>Flipkart: ₹67,499</span>
+      </div>
+      <strong>Save ₹2500</strong>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📊 Compare Products</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Adidas Sneakers</h3>
+      <div class="comparison">
+        <span>Amazon: ₹4999</span>
+        <span>Myntra: ₹4599</span>
+      </div>
+      <strong>Lowest: Myntra</strong>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>✨ Features</h2>
+  <div class="grid">
+    <div class="card">Smart Price Tracking</div>
+    <div class="card">Trend Detection</div>
+    <div class="card">Wishlist Alerts</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>📩 Stay Updated</h2>
+  <p>Get alerts when prices drop</p>
+  <input placeholder="Enter email" />
+  <button class="btn primary">Subscribe</button>
+</section>
+
+<footer>
+  <p>© 2026 Pickwise</p>
+</footer>
+
+</body>
+</html>
